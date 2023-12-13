@@ -17,7 +17,6 @@ const part1 = (rawInput: string) => {
   for (let i=0; i < raceTimes.length; i++) {
     let solutions = 0;
     for (let j=1; raceTimes[i]-j > 0; j++) {
-      console.log(`Race Time: ${raceTimes[i]-j} Race speed: ${j} distance: (${(raceTimes[i]-j) * j}`)
       if ((raceTimes[i]-j) * j > raceRecords[i]) {
         solutions++
       }
@@ -26,16 +25,24 @@ const part1 = (rawInput: string) => {
     numSolutions.push(solutions)
   }
 
-  console.log(raceTimes, raceRecords)
-  console.log(numSolutions)
   return numSolutions.reduce((a, b) => a * b, 1)
 
 };
 
 const part2 = (rawInput: string) => {
   const input = parseInput(rawInput);
+  const lines = input.split(/\r?\n/);
+  const raceTime = parseInt([...lines[0].split(":")[1].matchAll(/\d+/g)].reduce((a, b) => a + b, ''))
+  const raceRecord = parseInt([...lines[1].split(":")[1].matchAll(/\d+/g)].reduce((a, b) => a + b, ''))
 
-  return;
+  let solutions = 0;
+    for (let j=1; raceTime - j > 0; j++) {
+      if ((raceTime - j) * j > raceRecord) {
+        solutions++
+      }
+    }
+
+  return solutions;
 };
 
 run({
